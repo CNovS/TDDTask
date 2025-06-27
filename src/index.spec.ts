@@ -20,15 +20,22 @@ describe('TDD task', () => {
         expect(scoreboard).toEqual(expectedScoreboard)
     });
 
-    it('should return an empty scoreboard if any team has empty value when starting a match', () => {  
+    it('should return an empty scoreboard if any team has an empty value when starting a match', () => {  
         component.startMatch('', 'Team B');    
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(0);
         expect(scoreboard).toEqual([]);
     });
-    
+
     //Update
-    it.todo('should update the score of the match with the given score values');
+    it('should update the score of the match with the given score values', () => {  
+        const updatedMatch = { homeTeam: 'Team A', homeTeamScore: 2, awayTeam: 'Team B', awayTeamScore: 3 };
+        component.updateMatchScore(updatedMatch);
+        const scoreboard = component.getScoreboard();
+        expect(scoreboard).toHaveLength(1);
+        expect(scoreboard).toEqual([updatedMatch])
+    });
+    
     it.todo('should not update the score of the match if no valid scores are passed');
     //Finish
     it.todo('should remove the finished match from the scoreboard');
