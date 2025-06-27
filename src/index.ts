@@ -46,6 +46,7 @@ export class Scoreboard {
     const index = this.scoreboard.findIndex(match=> match.homeTeam === homeTeam && match.awayTeam === awayTeam);
     if (index !== -1) {
       this.summary.push(this.scoreboard[index]);  
+      this.summary = this.summary.toSorted((a, b) => (b.homeTeamScore + b.awayTeamScore) - (a.homeTeamScore + a.awayTeamScore));
       this.scoreboard = this.scoreboard.toSpliced(index, 1);
       }
     } 
