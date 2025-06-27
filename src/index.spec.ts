@@ -86,6 +86,17 @@ describe('TDD task', () => {
     });
 
     //Summary
+    it('should return the summary with the finished match', () => {
+        component.startMatch('Team A', 'Team B'); 
+        const updatedMatch = { homeTeam: 'Team A', homeTeamScore: 2, awayTeam: 'Team B', awayTeamScore: 3 };
+        component.updateMatchScore(updatedMatch);
+        const scoreboard = component.getScoreboard();
+        component.finishMatch('Team A', 'Team B');
+        const summary = component.getSummary();
+        expect(summary).toHaveLength(1);
+        expect(summary).toEqual(updatedMatch);
+    });
+
     it.todo('should return the summary with the finished matches ordered by their total score');
     it.todo('should return all matches with the same total score, ordered by the most recently started one');
     it.todo('should return empty summary if no matches are finished');
