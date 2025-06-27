@@ -59,7 +59,15 @@ describe('TDD task', () => {
     });
 
     //Finish
-    it.todo('should remove the finished match from the scoreboard');
+    it('should remove the finished match from the scoreboard', () => {
+        component.startMatch('Team A', 'Team B');  
+        component.finishMatch('Team A', 'Team B');
+        const scoreboard = component.getScoreboard();
+        expect(scoreboard).toHaveLength(0);
+        expect(scoreboard).toEqual([])
+
+    });
+    
     //Summary
     it.todo('should return the summary with the finished matches ordered by their total score');
     it.todo('should return all matches with the same total score, ordered by the most recently started one');
