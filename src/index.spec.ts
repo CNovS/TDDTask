@@ -111,7 +111,25 @@ describe('TDD task', () => {
         expect(summary[1]).toEqual(nonUpdatedMatch);
     });
 
-    it.todo('should return all matches with the same total score, ordered by the most recently started one');
+    it('should return all matches with the same total score, ordered by the most recently started one', () => {
+        const updatedMatch = { homeTeam: 'Team C', homeTeamScore: 2, awayTeam: 'Team D', awayTeamScore: 3 };
+        const nonUpdatedFirstMatch = { homeTeam: 'Team A', homeTeamScore: 0, awayTeam: 'Team B', awayTeamScore: 0 };
+        const nonUpdatedLastMatch = { homeTeam: 'Team E', homeTeamScore: 0, awayTeam: 'Team F', awayTeamScore: 0 };
+        component.startMatch('Team A', 'Team B');
+        component.startMatch('Team C', 'Team D');
+        component.startMatch('Team E', 'Team F');
+        component.finishMatch('Team E', 'Team F');
+        component.updateMatchScore(updatedMatch);
+        component.finishMatch('Team C', 'Team D');
+        component.finishMatch('Team A', 'Team B');
+
+        const summary = component.getSummary();
+        expect(summary).toHaveLength(3);
+        expect(summary[0]).toEqual(updatedMatch);
+        expect(summary[1]).toEqual(nonUpdatedFirstMatch);
+        expect(summary[2]).toEqual(nonUpdatedLastMatch);
+    });
+    
     it.todo('should return empty summary if no matches are finished');
     it.todo('should return empty summary if the match to finish does not exist');
 });
