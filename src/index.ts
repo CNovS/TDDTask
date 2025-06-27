@@ -6,6 +6,7 @@ interface Match {
 }
 export class Scoreboard {
   private scoreboard: Match[] = []; 
+  private summary: Match[] = []; 
 
   public getScoreboard(): Match[] {
       return this.scoreboard;
@@ -42,7 +43,15 @@ export class Scoreboard {
 
   public finishMatch(homeTeam: string, awayTeam: string): void {
     if (homeTeam && awayTeam) {
-      this.scoreboard = this.scoreboard.filter(match=> match.homeTeam !== homeTeam || match.awayTeam !== awayTeam);
+    const index = this.scoreboard.findIndex(match=> match.homeTeam === homeTeam && match.awayTeam === awayTeam);
+    if (index !== -1) {
+      this.summary.push(this.scoreboard[index]);  
+      this.scoreboard = this.scoreboard.toSpliced(index, 1);
       }
+    } 
+  }
+
+  public getSummary(): Match[] {
+   return this.summary;
   }
 }

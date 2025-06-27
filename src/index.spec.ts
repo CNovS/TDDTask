@@ -94,7 +94,7 @@ describe('TDD task', () => {
         component.finishMatch('Team A', 'Team B');
         const summary = component.getSummary();
         expect(summary).toHaveLength(1);
-        expect(summary).toEqual(updatedMatch);
+        expect(summary).toEqual([updatedMatch]);
     });
 
     it.todo('should return the summary with the finished matches ordered by their total score');
