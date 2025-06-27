@@ -24,6 +24,10 @@ export class Scoreboard {
   }
 
     public updateMatchScore(updatedMatch: Match): void {
+      if (updatedMatch.homeTeamScore < 0 || updatedMatch.awayTeamScore < 0) {
+        return;
+      }
+      
       this.scoreboard = this.scoreboard.map(match => {
         if (match.homeTeam === updatedMatch.homeTeam && match.awayTeam === updatedMatch.awayTeam) {
           return {
