@@ -1,6 +1,5 @@
-import { helloWorld } from './index';
-
 describe('TDD task', () => {
+    it.todo('should exist scoreboard as empty array if no matches are started');
     //Start
     it.todo('should start in the scoreboard with 0 - 0 as score');
     it.todo('should return an empty scoreboard if no matches are started');
@@ -13,7 +12,6 @@ describe('TDD task', () => {
     //Summary
     it.todo('should return the summary with the finished matches ordered by their total score');
     it.todo('should return all matches with the same total score, ordered by the most recently started one');
-    it.todo('should return empty summary if no matches are started');
     it.todo('should return empty summary if no matches are finished');
     it.todo('should return empty summary if the match to finish does not exist');
 });
