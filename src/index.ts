@@ -2,7 +2,8 @@ interface Match {
   homeTeam: string;
   homeTeamScore: number;  
   awayTeam: string;
-  awayTeamScore: number;  
+  awayTeamScore: number;
+  startTime?: Date;
 }
 export class Scoreboard {
   private scoreboard: Match[] = []; 
@@ -18,9 +19,10 @@ export class Scoreboard {
         homeTeam,
         homeTeamScore: 0,
         awayTeam,
-        awayTeamScore: 0
+        awayTeamScore: 0,
+        startTime: new Date()
       };
-      this.scoreboard.push(match);
+      this.scoreboard = [...this.scoreboard, match];
       }
   }
 
@@ -45,8 +47,7 @@ export class Scoreboard {
     if (homeTeam && awayTeam) {
     const index = this.scoreboard.findIndex(match=> match.homeTeam === homeTeam && match.awayTeam === awayTeam);
     if (index !== -1) {
-      this.summary.push(this.scoreboard[index]);  
-      this.summary = this.summary.toSorted((a, b) => (b.homeTeamScore + b.awayTeamScore) - (a.homeTeamScore + a.awayTeamScore));
+      this.summary = this.sortSummary([...this.summary, this.scoreboard[index]]);
       this.scoreboard = this.scoreboard.toSpliced(index, 1);
       }
     } 
@@ -54,5 +55,19 @@ export class Scoreboard {
 
   public getSummary(): Match[] {
    return this.summary;
+  }
+
+  private sortSummary(summary: Match[]): Match[] {
+    let sortedSummary = summary.slice().toSorted((a, b) => {
+      const totalScoreA = a.homeTeamScore + a.awayTeamScore;
+      const totalScoreB = b.homeTeamScore + b.awayTeamScore;
+      if (totalScoreA === totalScoreB) {
+        if (a.startTime && b.startTime) {
+          return a.startTime.getTime() > b.startTime.getTime() ? 1 : -1;
+        }
+      }
+        return totalScoreB - totalScoreA;
+      });
+    return sortedSummary;
   }
 }

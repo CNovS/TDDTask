@@ -17,7 +17,7 @@ describe('TDD task', () => {
         component.startMatch('Team A', 'Team B');    
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual(expectedScoreboard)
+        expect(scoreboard).toMatchObject(expectedScoreboard)
     });
 
     it('should return an empty scoreboard if any team has an empty value when starting a match', () => {  
@@ -35,7 +35,7 @@ describe('TDD task', () => {
         component.updateMatchScore(updatedMatch);
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual([updatedMatch])
+        expect(scoreboard).toMatchObject([updatedMatch])
     });
 
     it('should not update the score of the match if no valid scores are passed', () => {
@@ -45,7 +45,7 @@ describe('TDD task', () => {
         component.updateMatchScore(updatedMatch);
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual(expectedScoreboard)
+        expect(scoreboard).toMatchObject(expectedScoreboard)
     });
 
     it('should not update the score of the match if no match is found with the given teams', () => {
@@ -55,7 +55,7 @@ describe('TDD task', () => {
         component.updateMatchScore(updatedMatch);
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual(expectedScoreboard)
+        expect(scoreboard).toMatchObject(expectedScoreboard)
     });
 
     //Finish
@@ -73,7 +73,7 @@ describe('TDD task', () => {
         component.finishMatch('Team X', 'Team B');
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual(expectedScoreboard);
+        expect(scoreboard).toMatchObject(expectedScoreboard);
     });
 
     it('should not remove any match if the given match names are not valid', () => {
@@ -82,7 +82,7 @@ describe('TDD task', () => {
         component.finishMatch('', 'Team B');
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
-        expect(scoreboard).toEqual(expectedScoreboard);
+        expect(scoreboard).toMatchObject(expectedScoreboard);
     });
 
     //Summary
@@ -94,7 +94,7 @@ describe('TDD task', () => {
         component.finishMatch('Team A', 'Team B');
         const summary = component.getSummary();
         expect(summary).toHaveLength(1);
-        expect(summary).toEqual([updatedMatch]);
+        expect(summary).toMatchObject([updatedMatch]);
     });
 
     it('should return the summary with the finished matches ordered by their total score', () => {
@@ -107,8 +107,8 @@ describe('TDD task', () => {
         component.finishMatch('Team C', 'Team D');
         const summary = component.getSummary();
         expect(summary).toHaveLength(2);
-        expect(summary[0]).toEqual(updatedMatch);
-        expect(summary[1]).toEqual(nonUpdatedMatch);
+        expect(summary[0]).toMatchObject(updatedMatch);
+        expect(summary[1]).toMatchObject(nonUpdatedMatch);
     });
 
     it('should return all matches with the same total score, ordered by the most recently started one', () => {
@@ -125,9 +125,9 @@ describe('TDD task', () => {
 
         const summary = component.getSummary();
         expect(summary).toHaveLength(3);
-        expect(summary[0]).toEqual(updatedMatch);
-        expect(summary[1]).toEqual(nonUpdatedFirstMatch);
-        expect(summary[2]).toEqual(nonUpdatedLastMatch);
+        expect(summary[0]).toMatchObject(updatedMatch);
+        expect(summary[1]).toMatchObject(nonUpdatedFirstMatch);
+        expect(summary[2]).toMatchObject(nonUpdatedLastMatch);
     });
     
     it.todo('should return empty summary if no matches are finished');
