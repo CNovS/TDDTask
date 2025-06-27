@@ -1,6 +1,12 @@
+import { Scoreboard} from './index';
 describe('TDD task', () => {
+    let component: Scoreboard;
+    beforeEach(() => {
+    component = new Scoreboard();
+    });
+
     it('should exist scoreboard as empty array if no matches are started', () => {
-        const scoreboard = getScoreboard();
+        const scoreboard = component.getScoreboard();
         expect(scoreboard).toEqual([]);
     });
     //Start
