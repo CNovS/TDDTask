@@ -39,4 +39,10 @@ export class Scoreboard {
         return match;
       });
   }
+
+  public finishMatch(homeTeam: string, awayTeam: string): void {
+    if (homeTeam && awayTeam) {
+      this.scoreboard = this.scoreboard.filter(match=> match.homeTeam !== homeTeam || match.awayTeam !== awayTeam);
+      }
+  }
 }
