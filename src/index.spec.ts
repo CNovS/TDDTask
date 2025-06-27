@@ -1,5 +1,8 @@
 describe('TDD task', () => {
-    it.todo('should exist scoreboard as empty array if no matches are started');
+    it('should exist scoreboard as empty array if no matches are started', () => {
+        const scoreboard = getScoreboard();
+        expect(scoreboard).toEqual([]);
+    });
     //Start
     it.todo('should start in the scoreboard with 0 - 0 as score');
     it.todo('should return an empty scoreboard if no matches are started');
