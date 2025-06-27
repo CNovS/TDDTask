@@ -48,7 +48,15 @@ describe('TDD task', () => {
         expect(scoreboard).toEqual(expectedScoreboard)
     });
 
-    it.todo('should not update the score of the match if no match is found with the given teams');
+    it('should not update the score of the match if no match is found with the given teams', () => {
+        const updatedMatch = { homeTeam: 'X', homeTeamScore: 1, awayTeam: 'Team B', awayTeamScore: 2 };
+        const expectedScoreboard = [{ homeTeam: 'Team A', homeTeamScore: 0, awayTeam: 'Team B', awayTeamScore: 0 }]
+        component.startMatch('Team A', 'Team B');  
+        component.updateMatchScore(updatedMatch);
+        const scoreboard = component.getScoreboard();
+        expect(scoreboard).toHaveLength(1);
+        expect(scoreboard).toEqual(expectedScoreboard)
+    });
 
     //Finish
     it.todo('should remove the finished match from the scoreboard');
