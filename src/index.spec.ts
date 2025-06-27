@@ -1,6 +1,7 @@
 import { Scoreboard} from './index';
 describe('TDD task', () => {
     let component: Scoreboard;
+
     beforeEach(() => {
     component = new Scoreboard();
     });
@@ -9,8 +10,15 @@ describe('TDD task', () => {
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toEqual([]);
     });
+    
     //Start
-    it.todo('should start in the scoreboard with 0 - 0 as score');
+    it('should start in the scoreboard with 0 - 0 as score', () => {
+        const expectedScoreboard = [{ homeTeam: 'Team A', homeTeamScore: 0, awayTeam: 'Team B', awayTeamScore: 0 }]
+        component.startMatch('Team A', 'Team B');    
+        const scoreboard = component.getScoreboard();
+        expect(scoreboard).toHaveLength(1);
+        expect(scoreboard).toEqual(expectedScoreboard)
+    });
     it.todo('should return an empty scoreboard if no matches are started');
     it.todo('should return an empty scoreboard if any team has empty value when starting a match');
     //Update
