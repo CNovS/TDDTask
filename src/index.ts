@@ -22,4 +22,17 @@ export class Scoreboard {
       this.scoreboard.push(match);
       }
   }
+
+    public updateMatchScore(updatedMatch: Match): void {
+      this.scoreboard = this.scoreboard.map(match => {
+        if (match.homeTeam === updatedMatch.homeTeam && match.awayTeam === updatedMatch.awayTeam) {
+          return {
+            ...match,
+            homeTeamScore: updatedMatch.homeTeamScore,
+            awayTeamScore: updatedMatch.awayTeamScore
+          };
+        }
+        return match;
+      });
+  }
 }

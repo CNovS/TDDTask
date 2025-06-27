@@ -29,13 +29,16 @@ describe('TDD task', () => {
 
     //Update
     it('should update the score of the match with the given score values', () => {  
+        //TODO: Refactor
+        const expectedScoreboard = [{ homeTeam: 'Team A', homeTeamScore: 0, awayTeam: 'Team B', awayTeamScore: 0 }]
+        component.startMatch('Team A', 'Team B');  
         const updatedMatch = { homeTeam: 'Team A', homeTeamScore: 2, awayTeam: 'Team B', awayTeamScore: 3 };
         component.updateMatchScore(updatedMatch);
         const scoreboard = component.getScoreboard();
         expect(scoreboard).toHaveLength(1);
         expect(scoreboard).toEqual([updatedMatch])
     });
-    
+
     it.todo('should not update the score of the match if no valid scores are passed');
     //Finish
     it.todo('should remove the finished match from the scoreboard');
