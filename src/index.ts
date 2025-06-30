@@ -18,6 +18,7 @@ export class Scoreboard {
   }
 
   public startMatch(homeTeam: string, awayTeam: string): void {
+    if (this.scoreboard.some(m => m.homeTeam === homeTeam && m.awayTeam === awayTeam)) return;
     if (homeTeam && awayTeam) {
         const match: Match = {
         homeTeam,
