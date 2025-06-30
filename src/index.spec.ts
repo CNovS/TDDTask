@@ -134,22 +134,21 @@ describe('TDD task', () => {
             expect(summary[1]).toMatchObject(expectedStartedMatchAB);
         });
 
-        it('should return all matches with the same total score, ordered by the most recently started one', () => {
+        it('should return all matches with the same total score, ordered by the most recently started one', async () => {
             const updatedMatchCD = { homeTeam: 'Team C', homeTeamScore: 2, awayTeam: 'Team D', awayTeamScore: 3 };
             const nonUpdatedLastMatchEF = { homeTeam: 'Team E', homeTeamScore: 0, awayTeam: 'Team F', awayTeamScore: 0 };
             startMatchAB();
             startMatchCD();
-            startMatchEF();
-            finishMatchEF();
             component.updateMatchScore(updatedMatchCD);
             finishMatchCD();
+            startMatchEF();
+            finishMatchEF();
             finishMatchAB();
-
             const summary = component.getSummary();
             expect(summary).toHaveLength(3);
             expect(summary[0]).toMatchObject(updatedMatchCD);
-            expect(summary[1]).toMatchObject(expectedStartedMatchAB);
-            expect(summary[2]).toMatchObject(nonUpdatedLastMatchEF);
+            expect(summary[1]).toMatchObject(nonUpdatedLastMatchEF);
+            expect(summary[2]).toMatchObject(expectedStartedMatchAB);
         });
         
         it('should return empty summary if no matches are finished', () => {

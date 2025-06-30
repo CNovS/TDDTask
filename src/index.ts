@@ -63,7 +63,7 @@ export class Scoreboard {
       const totalScoreB = b.homeTeamScore + b.awayTeamScore;
       if (totalScoreA === totalScoreB) {
         if (a.startTime && b.startTime) {
-          return a.startTime.getTime() > b.startTime.getTime() ? 1 : -1;
+          return b.startTime.getTime() - a.startTime.getTime();
         }
       }
         return totalScoreB - totalScoreA;
