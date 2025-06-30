@@ -136,6 +136,12 @@ describe('TDD task', () => {
         expect(summary).toHaveLength(0);
         expect(summary).toEqual([]);
     });
-    
-    it.todo('should return empty summary if the match to finish does not exist');
+
+    it('should return empty summary if the match to finish does not exist', () => {
+        component.startMatch('Team A', 'Team B');
+        component.finishMatch('Team X', 'Team B');
+        const summary = component.getSummary();
+        expect(summary).toHaveLength(0);
+        expect(summary).toEqual([]);
+    });
 });
