@@ -13,6 +13,10 @@ export class Scoreboard {
       return this.scoreboard;
     }
 
+  public getSummary(): Match[] {
+   return this.summary;
+  }
+
   public startMatch(homeTeam: string, awayTeam: string): void {
     if (homeTeam && awayTeam) {
         const match: Match = {
@@ -53,10 +57,6 @@ export class Scoreboard {
     } 
   }
 
-  public getSummary(): Match[] {
-   return this.summary;
-  }
-
   private sortSummary(summary: Match[]): Match[] {
     let sortedSummary = summary.slice().toSorted((a, b) => {
       const totalScoreA = a.homeTeamScore + a.awayTeamScore;
@@ -68,6 +68,6 @@ export class Scoreboard {
       }
         return totalScoreB - totalScoreA;
       });
-    return sortedSummary;
+    return [...sortedSummary];
   }
 }
