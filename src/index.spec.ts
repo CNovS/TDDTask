@@ -130,6 +130,12 @@ describe('TDD task', () => {
         expect(summary[2]).toMatchObject(nonUpdatedLastMatch);
     });
     
-    it.todo('should return empty summary if no matches are finished');
+    it('should return empty summary if no matches are finished', () => {
+        component.startMatch('Team A', 'Team B');
+        const summary = component.getSummary();
+        expect(summary).toHaveLength(0);
+        expect(summary).toEqual([]);
+    });
+    
     it.todo('should return empty summary if the match to finish does not exist');
 });
